@@ -573,8 +573,6 @@ package body axi_slave_private_pkg is
       return resp_to_string(resp) & "(" & to_string(resp) & ")";
     end;
   begin
-    if got /= expected then
-      failure(bus_handle.p_logger, msg & " - Got AXI response "  & describe(got) & " expected " & describe(expected));
-    end if;
+    check(bus_handle.p_checker, got = expected, result("for " & msg & " - Got AXI response "  & describe(got) & " expected " & describe(expected)), failure);
   end;
 end package body;
